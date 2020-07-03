@@ -46,6 +46,7 @@ contract EmployeeTokenOwnershipPlan
     );
 
     constructor(
+        uint       _totalReward,
         address[]  calldata _members,
         uint[]     calldata _amounts
         )
@@ -60,6 +61,7 @@ contract EmployeeTokenOwnershipPlan
             records[_members[i]] = record;
             totalReward = totalReward.add(_amounts[i]);
         }
+        require(_totalReward == totalReward, "VALUE_MISMATCH");
     }
 
     function withdrawFor(address recipient)
