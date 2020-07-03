@@ -39,7 +39,7 @@ contract EmployeeTokenOwnershipPlan
     uint public vestStart;
     mapping (address => Record) private records;
 
-    event WithdrawnTo(
+    event Withdrawal(
         address indexed transactor,
         address indexed member,
         uint            amount
@@ -102,6 +102,6 @@ contract EmployeeTokenOwnershipPlan
 
         require(ERC20(lrcAddress).transfer(recipient, amount), "transfer failed");
 
-        emit WithdrawnTo(msg.sender, recipient, amount);
+        emit Withdrawal(msg.sender, recipient, amount);
     }
 }
