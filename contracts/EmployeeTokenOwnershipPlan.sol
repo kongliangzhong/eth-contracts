@@ -16,14 +16,13 @@
 */
 pragma solidity ^0.6.6;
 
-import "./Claimable.sol";
 import "./ERC20.sol";
 import "./MathUint.sol";
 
 
 /// @title EmployeeTokenOwnershipPlan
 /// @author Freeman Zhong - <kongliang@loopring.org>
-contract EmployeeTokenOwnershipPlan is Claimable
+contract EmployeeTokenOwnershipPlan
 {
     using MathUint for uint;
 
@@ -51,7 +50,6 @@ contract EmployeeTokenOwnershipPlan is Claimable
         uint[]     calldata _amounts
         )
         public
-        Claimable()
     {
         require(_members.length == _amounts.length, "INVALID_PARAMETERS");
 
@@ -64,9 +62,8 @@ contract EmployeeTokenOwnershipPlan is Claimable
         }
     }
 
-    function withdrawTo(address recipient)
+    function withdrawFor(address recipient)
         external
-        onlyOwner
     {
         _withdraw(recipient);
     }
