@@ -32,7 +32,7 @@ contract EmployeeTokenOwnershipPlan
         uint withdrawn;
     }
 
-    uint    public constant vestPeriod = 3 years;
+    uint    public constant vestPeriod = 2 years;
     address public constant lrcAddress = 0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD;
 
     uint public totalReward;
