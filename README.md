@@ -1,3 +1,6 @@
-## sample ethereum smart contracts
+## Some ethereum smart contracts
+
+### Compile:
+> truffle compile
 
 

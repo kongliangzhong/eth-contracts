@@ -32,7 +32,7 @@ contract EmployeeTokenOwnershipPlan
         uint withdrawn;
     }
 
-    uint    public constant vestPeriod = 2 years;
+    uint    public constant vestPeriod = 2 * 365 days;
     address public constant lrcAddress = 0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD;
 
     uint public totalReward;
@@ -47,8 +47,8 @@ contract EmployeeTokenOwnershipPlan
 
     constructor(
         uint       _totalReward,
-        address[]  calldata _members,
-        uint[]     calldata _amounts
+        address[]  memory _members,
+        uint[]     memory _amounts
         )
         public
     {
@@ -76,6 +76,13 @@ contract EmployeeTokenOwnershipPlan
         _withdraw(msg.sender);
     }
 
+    receive() external payable {
+        _withdraw(msg.sender);
+        if (msg.value > 0) {
+            msg.sender.transfer(msg.value);
+        }
+    }
+
     function vested(address recipient)
         public
         view
@@ -89,7 +96,7 @@ contract EmployeeTokenOwnershipPlan
         view
         returns(uint)
     {
-        return vested(recipient).sub([records].withdrawn);
+        return vested(recipient).sub(records[recipient].withdrawn);
     }
 
     function _withdraw(address recipient)
