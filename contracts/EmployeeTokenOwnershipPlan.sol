@@ -46,8 +46,9 @@ contract EmployeeTokenOwnershipPlan is Claimable
         uint            amount
     );
 
-    constructor() public Claimable()
+    constructor() public
     {
+        owner = 0x96f16FdB8Cd37C02DEeb7025C1C7618E1bB34d97;
 
         address payable[17] memory _members = [
             0xb18768c26f0922056b3550a24f421618Fe12D126,
