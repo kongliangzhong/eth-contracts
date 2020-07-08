@@ -16,13 +16,14 @@
 */
 pragma solidity ^0.6.6;
 
+import "./Claimable.sol";
 import "./ERC20.sol";
 import "./MathUint.sol";
 
 
 /// @title EmployeeTokenOwnershipPlan
 /// @author Freeman Zhong - <kongliang@loopring.org>
-contract EmployeeTokenOwnershipPlan
+contract EmployeeTokenOwnershipPlan is Claimable
 {
     using MathUint for uint;
 
@@ -32,7 +33,7 @@ contract EmployeeTokenOwnershipPlan
         uint withdrawn;
     }
 
-    uint    public constant vestPeriod = 2 years;
+    uint    public constant vestPeriod = 2 * 365 days;
     address public constant lrcAddress = 0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD;
 
     uint public totalReward;
@@ -45,15 +46,50 @@ contract EmployeeTokenOwnershipPlan
         uint            amount
     );
 
-    constructor(
-        uint       _totalReward,
-        address[]  calldata _members,
-        uint[]     calldata _amounts
-        )
-        public
+    constructor() public Claimable()
     {
-        require(_members.length == _amounts.length, "INVALID_PARAMETERS");
 
+        address payable[17] memory _members = [
+            0xb18768c26f0922056b3550a24f421618Fe12D126,
+            0x2Ff7eD213B4E5Cf813048d3fBC50E77BA80B26B0,
+            0xd3725C997B580E36707f73880aC006B6757b5009,
+            0x522c9A3e5857a58373F072e127F00F7dac6D6969,
+            0x45a98C1B46d8a1D5c4cC52Cc18a4569b27F61939,
+            0xBe4C1cb10C2Be76798c4186ADbbC34356b358b52,
+            0x8db15c6883B61588C54961f1401CC71C6206Fe38,
+            0x6b1029C9AE8Aa5EEA9e045E8ba3C93d380D5BDDa,
+            0x95C6E2D5EAD1Aa2a5aAab33d735739c82D623C88,
+            0x07A7191de1BA70dBe875F12e744B020416a5712b,
+            0x59962c3078852Ff7757babf525F90CDffD3FdDf0,
+            0x7154a02BA6eEaB9300D056e25f3EEA3481680f87,
+            0x2bbFe5650e9876fb313D6b32352c6Dc5966A7B68,
+            0x056757881C358b8E1A3Cc6374f2cb545c587d3FA,
+            0x1fcBAb8012177540fb8e121d0073f81219Fc828E,
+            0xe865759DF485c11070504e76B900938D2d9A7738,
+            0x51cDF96c9b6EC28A0241c4Be433854bd3dc0bc79
+        ];
+
+        uint88[17] memory _amounts = [
+            1491300 ether,
+            1491300 ether,
+            1491300 ether,
+            1491300 ether,
+            1118400 ether,
+            1118400 ether,
+            1118400 ether,
+            1118400 ether,
+            1006600 ether,
+            1006600 ether,
+            560000  ether,
+            248500  ether,
+            248500  ether,
+            5000000 ether,
+            5000000 ether,
+            5000000 ether,
+            5000000 ether
+        ];
+
+        uint _totalReward = 33509000 ether;
         vestStart = now;
 
         for (uint i = 0; i < _members.length; i++) {
@@ -89,7 +125,7 @@ contract EmployeeTokenOwnershipPlan
         view
         returns(uint)
     {
-        return vested(recipient).sub([records].withdrawn);
+        return vested(recipient).sub(records[recipient].withdrawn);
     }
 
     function _withdraw(address recipient)
@@ -105,5 +141,14 @@ contract EmployeeTokenOwnershipPlan
         require(ERC20(lrcAddress).transfer(recipient, amount), "transfer failed");
 
         emit Withdrawal(msg.sender, recipient, amount);
+    }
+
+    function collect()
+        external
+        onlyOwner
+    {
+        require(now > vestStart + vestPeriod + 60 days, "TOO_EARLY");
+        uint amount = ERC20(lrcAddress).balanceOf(address(this));
+        require(ERC20(lrcAddress).transfer(msg.sender, amount), "transfer failed");
     }
 }
