@@ -38,7 +38,7 @@ contract EmployeeTokenOwnershipPlan is Claimable
 
     uint public totalReward;
     uint public vestStart;
-    mapping (address => Record) private records;
+    mapping (address => Record) public records;
 
     event Withdrawal(
         address indexed transactor,
