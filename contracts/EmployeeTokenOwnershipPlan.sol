@@ -82,7 +82,7 @@ contract EmployeeTokenOwnershipPlan is Claimable
         ];
 
         uint88[28] memory _amounts = [
-            // pool 2 + pool 1 + special
+            // pool 2 + pool 1
             (5000000 + 2209239) ether,
             (5000000 +  441848) ether,
             (5000000 +       0) ether,
@@ -95,7 +95,7 @@ contract EmployeeTokenOwnershipPlan is Claimable
             (1118400 +  883696) ether,
             (1118400 +  331386) ether,
             (1118400 +       0) ether,
-            (1006600 + 1546467 + 300000) ether,
+            (1306600 + 1546467) ether,
             (1006600 +  441848) ether,
             ( 560000 +  331386) ether,
             ( 248500 +  191099) ether,
