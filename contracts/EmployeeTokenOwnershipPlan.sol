@@ -113,7 +113,7 @@ contract EmployeeTokenOwnershipPlan is Claimable
             (      0 + 4448303) ether
         ];
 
-        uint _totalReward = (33509000 + 22092391 + 300000) ether;
+        uint _totalReward = 55901391 ether;
         vestStart = now;
 
         for (uint i = 0; i < _members.length; i++) {
