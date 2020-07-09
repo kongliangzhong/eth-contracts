@@ -69,7 +69,7 @@ contract EmployeeTokenOwnershipPlan is Claimable
             0x7154a02BA6eEaB9300D056e25f3EEA3481680f87,
             0x2bbFe5650e9876fb313D6b32352c6Dc5966A7B68,
             0xb63b22f3ddcc7f469bcb757a5b64a3848f4c4f03,
-            0x6087bfe868d52b15399d06b16742214c1ca722ac,
+            0x378d6578Bb1F1C36914C64Ba267613393Aba2666,
             0x3AC6061A50b8145b54b76Be9CF485c80DFF20589,
             0x8d26A876917e79916E70e23b34A23aC91EC5E591,
             0xebFF93D8ac49C037519e84a075bf231023224ddC,
@@ -78,11 +78,11 @@ contract EmployeeTokenOwnershipPlan is Claimable
             0x64F2741920b7df046b7fE8df2e6b0bEad2452bea,
             0x4f90c157CdA2856dB9780BafE13ccECB569cC74a,
             0x2a14Ae2411B6D681c48781037F15f2610034ebFb,
-            0x96f16FdB8Cd37C02DEeb7025C1C7618E1bB34d97
+            0xd888B723b8C6BBA8b27ea9B0690094B3b564F618
         ];
 
         uint88[28] memory _amounts = [
-            // pool 2 + pool 1 + special
+            // pool 2 + pool 1
             (5000000 + 2209239) ether,
             (5000000 +  441848) ether,
             (5000000 +       0) ether,
@@ -95,7 +95,7 @@ contract EmployeeTokenOwnershipPlan is Claimable
             (1118400 +  883696) ether,
             (1118400 +  331386) ether,
             (1118400 +       0) ether,
-            (1006600 + 1546467 + 300000) ether,
+            (1306600 + 1546467) ether,
             (1006600 +  441848) ether,
             ( 560000 +  331386) ether,
             ( 248500 +  191099) ether,
@@ -110,10 +110,10 @@ contract EmployeeTokenOwnershipPlan is Claimable
             (      0 +  331386) ether,
             (      0 +  331386) ether,
             (      0 +  110462) ether,
-            (      0 + 4448303) ether
+            (      0 + 4546912) ether
         ];
 
-        uint _totalReward = (33509000 + 22092391 + 300000) ether;
+        uint _totalReward = 56000000 ether;
         vestStart = now;
 
         for (uint i = 0; i < _members.length; i++) {
