@@ -78,7 +78,7 @@ contract EmployeeTokenOwnershipPlan is Claimable
             0x64F2741920b7df046b7fE8df2e6b0bEad2452bea,
             0x4f90c157CdA2856dB9780BafE13ccECB569cC74a,
             0x2a14Ae2411B6D681c48781037F15f2610034ebFb,
-            0x96f16FdB8Cd37C02DEeb7025C1C7618E1bB34d97
+            0xd888B723b8C6BBA8b27ea9B0690094B3b564F618
         ];
 
         uint88[28] memory _amounts = [
