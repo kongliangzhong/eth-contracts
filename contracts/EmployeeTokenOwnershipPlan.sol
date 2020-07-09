@@ -50,7 +50,11 @@ contract EmployeeTokenOwnershipPlan is Claimable
     {
         owner = 0x96f16FdB8Cd37C02DEeb7025C1C7618E1bB34d97;
 
-        address payable[17] memory _members = [
+        address payable[28] memory _members = [
+            0x056757881C358b8E1A3Cc6374f2cb545c587d3FA,
+            0x1fcBAb8012177540fb8e121d0073f81219Fc828E,
+            0xe865759DF485c11070504e76B900938D2d9A7738,
+            0x51cDF96c9b6EC28A0241c4Be433854bd3dc0bc79,
             0xb18768c26f0922056b3550a24f421618Fe12D126,
             0x2Ff7eD213B4E5Cf813048d3fBC50E77BA80B26B0,
             0xd3725C997B580E36707f73880aC006B6757b5009,
@@ -64,33 +68,52 @@ contract EmployeeTokenOwnershipPlan is Claimable
             0x59962c3078852Ff7757babf525F90CDffD3FdDf0,
             0x7154a02BA6eEaB9300D056e25f3EEA3481680f87,
             0x2bbFe5650e9876fb313D6b32352c6Dc5966A7B68,
-            0x056757881C358b8E1A3Cc6374f2cb545c587d3FA,
-            0x1fcBAb8012177540fb8e121d0073f81219Fc828E,
-            0xe865759DF485c11070504e76B900938D2d9A7738,
-            0x51cDF96c9b6EC28A0241c4Be433854bd3dc0bc79
+            0xb63b22f3ddcc7f469bcb757a5b64a3848f4c4f03,
+            0x6087bfe868d52b15399d06b16742214c1ca722ac,
+            0x3AC6061A50b8145b54b76Be9CF485c80DFF20589,
+            0x8d26A876917e79916E70e23b34A23aC91EC5E591,
+            0xebFF93D8ac49C037519e84a075bf231023224ddC,
+            0x63830F62C44BE28703B66e5679A42eBED1d48C8a,
+            0x0C3499a325B47b5950F731263fEA144AC95f6bbb,
+            0xf5a57a639c8243a7571f5b57e2e7ae9e4a362e84,
+            0x4f90c157CdA2856dB9780BafE13ccECB569cC74a,
+            0x2a14Ae2411B6D681c48781037F15f2610034ebFb,
+            0x96f16FdB8Cd37C02DEeb7025C1C7618E1bB34d97
         ];
 
-        uint88[17] memory _amounts = [
-            1491300 ether,
-            1491300 ether,
-            1491300 ether,
-            1491300 ether,
-            1118400 ether,
-            1118400 ether,
-            1118400 ether,
-            1118400 ether,
-            1006600 ether,
-            1006600 ether,
-            560000  ether,
-            248500  ether,
-            248500  ether,
-            5000000 ether,
-            5000000 ether,
-            5000000 ether,
-            5000000 ether
+        uint88[28] memory _amounts = [
+            // pool 2 + pool 1
+            (5000000 + 2209239) ether,
+            (5000000 +  441848) ether,
+            (5000000 +       0) ether,
+            (5000000 + 1767391) ether,
+            (1491300 + 1546467) ether,
+            (1491300 + 1215081) ether,
+            (1491300 +  883696) ether,
+            (1491300 +       0) ether,
+            (1118400 +  883696) ether,
+            (1118400 +  883696) ether,
+            (1118400 +  331386) ether,
+            (1118400 +       0) ether,
+            (1006600 + 1546467) ether,
+            (1006600 +  441848) ether,
+            ( 560000 +  331386) ether,
+            ( 248500 +  191099) ether,
+            ( 248500 +       0) ether,
+            (      0 + 1325543) ether,
+            (      0 + 1104619) ether,
+            (      0 +  441848) ether,
+            (      0 +  331386) ether,
+            (      0 +  331386) ether,
+            (      0 +  331386) ether,
+            (      0 +  331386) ether,
+            (      0 +  331386) ether,
+            (      0 +  331386) ether,
+            (      0 +  110462) ether,
+            (      0 + 4448303) ether
         ];
 
-        uint _totalReward = 33509000 ether;
+        uint _totalReward = (33509000 + 22092391) ether;
         vestStart = now;
 
         for (uint i = 0; i < _members.length; i++) {
