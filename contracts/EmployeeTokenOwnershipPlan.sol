@@ -167,6 +167,13 @@ contract EmployeeTokenOwnershipPlan is Claimable
         emit Withdrawal(msg.sender, recipient, amount);
     }
 
+    receive() external payable {
+        _withdraw(msg.sender);
+        if (msg.value > 0) {
+            msg.sender.transfer(msg.value);
+        }
+    }
+
     function collect()
         external
         onlyOwner
