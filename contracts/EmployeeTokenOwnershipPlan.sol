@@ -130,12 +130,6 @@ contract EmployeeTokenOwnershipPlan is Claimable
         _withdraw(recipient);
     }
 
-    function withdraw()
-        external
-    {
-        _withdraw(msg.sender);
-    }
-
     function vested(address recipient)
         public
         view
@@ -145,7 +139,7 @@ contract EmployeeTokenOwnershipPlan is Claimable
     }
 
     function withdrawable(address recipient)
-        internal
+        public
         view
         returns(uint)
     {
@@ -168,10 +162,8 @@ contract EmployeeTokenOwnershipPlan is Claimable
     }
 
     receive() external payable {
+        require(msg.value == 0, "INVALID_VALUE");
         _withdraw(msg.sender);
-        if (msg.value > 0) {
-            msg.sender.transfer(msg.value);
-        }
     }
 
     function collect()
