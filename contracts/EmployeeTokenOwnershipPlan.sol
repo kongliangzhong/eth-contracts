@@ -139,7 +139,7 @@ contract EmployeeTokenOwnershipPlan is Claimable
     }
 
     function withdrawable(address recipient)
-        internal
+        public
         view
         returns(uint)
     {
