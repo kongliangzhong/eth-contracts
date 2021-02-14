@@ -9,7 +9,7 @@ import "./MathUint.sol";
 /// @title EmployeeTokenOwnershipPlan2
 /// added at 2021-02-14
 /// @author Freeman Zhong - <kongliang@loopring.org>
-contract EmployeeTokenOwnershipPlan2 is Claimable
+contract CancellableEmployeeTokenOwnershipPlan is Claimable
 {
     using MathUint for uint;
 
@@ -19,7 +19,7 @@ contract EmployeeTokenOwnershipPlan2 is Claimable
         uint withdrawn;
     }
 
-    uint    public constant vestPeriod = 2 * 365 days;
+    uint    public constant vestPeriod = 3 * 365 days;
     address public constant lrcAddress = 0xBBbbCA6A901c926F240b89EacB641d8Aec7AEafD;
 
     uint public totalReward;
