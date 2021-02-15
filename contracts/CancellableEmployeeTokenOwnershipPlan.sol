@@ -46,7 +46,7 @@ contract CancellableEmployeeTokenOwnershipPlan is Claimable
         onlyOwner
     {
         require(_members.length == _amounts.length, "DATA_LENGTH_MISMATCH");
-        require(vestStart == 0, "ALREADY_INIT");
+        require(vestStart == 0, "ALREADY_INITIALIZED");
 
         vestStart = block.timestamp;
         for (uint i = 0; i < _members.length; i++) {
