@@ -50,7 +50,7 @@ abstract contract BaseTokenOwnershipPlan is Claimable
         require(records[newRecipient].rewarded == 0, "INVALID_NEW_RECIPIENT");
 
         Record storage r = records[oldRecipient];
-        require(r.rewarded > 0, "INVALID_SENDER");
+        require(r.rewarded > 0, "INVALID_OLD_RECIPIENT");
 
         records[newRecipient] = r;
         delete records[oldRecipient];
