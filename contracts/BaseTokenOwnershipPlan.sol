@@ -49,12 +49,12 @@ abstract contract BaseTokenOwnershipPlan is Claimable
         require(newRecipient != address(0), "INVALID_ADDRESS");
         require(records[newRecipient].rewarded == 0, "INVALID_NEW_RECIPIENT");
 
-        Record storage r = records[msg.sender];
+        Record storage r = records[oldRecipient];
         require(r.rewarded > 0, "INVALID_SENDER");
 
         records[newRecipient] = r;
-        delete records[msg.sender];
-        emit MemberAddressChanged(msg.sender, newRecipient);
+        delete records[oldRecipient];
+        emit MemberAddressChanged(oldRecipient, newRecipient);
     }
 
     function vested(address recipient)
