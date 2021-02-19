@@ -174,7 +174,11 @@ contract EmployeeTokenOwnershipPlan2020 is Claimable
         view
         returns(uint)
     {
-        return records[recipient].rewarded.mul(block.timestamp.sub(vestStart)) / vestPeriod;
+        if (block.timestamp - vestStart < vestPeriod) {
+            return records[recipient].rewarded.mul(block.timestamp.sub(vestStart)) / vestPeriod;
+        } else {
+            return records[recipient].rewarded;
+        }
     }
 
     function withdrawable(address recipient)

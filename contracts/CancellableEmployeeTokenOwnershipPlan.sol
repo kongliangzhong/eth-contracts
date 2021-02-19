@@ -140,7 +140,6 @@ contract CancellableEmployeeTokenOwnershipPlan is Claimable
         view
         returns(uint)
     {
-
         if (block.timestamp - vestStart < vestPeriod) {
             return records[recipient].rewarded.mul(block.timestamp.sub(vestStart)) / vestPeriod;
         } else {
