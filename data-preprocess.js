@@ -2,7 +2,7 @@ const fs = require("fs");
 
 
 function parse2020LrcRewards() {
-  const lines = fs.readFileSync("2020_reward_2.tsv", "utf-8").split("\n");
+  const lines = fs.readFileSync("2020_reward_3.tsv", "utf-8").split("\n");
   const allItems = [];
   const revocableItems = [];
   const unrevocableItems = [];
@@ -10,11 +10,21 @@ function parse2020LrcRewards() {
   let sum1 = 0;
   let sum2 = 0;
   let sum3 = 0;
+
+  const addressSet = new Set();
   for (const line of lines) {
     const fields = line.split("\t").filter(i => i);
     if (fields[0].startsWith("0x")) {
       // console.log("line:", line);
-      const member = fields[0];
+      const member = fields[0].trim();
+
+      const memberLower = member.toLowerCase();
+      if (addressSet.has(memberLower)) {
+        console.error("duplicated member address:", member);
+        process.exit(1);
+      }
+      addressSet.add(memberLower);
+
       const rewardAmount = Number(fields[1].replace(/[,"]/g, ""));
       sum1 += rewardAmount;
 
@@ -56,7 +66,7 @@ function parse2020LrcRewards() {
   const unrevocableAmounts = unrevocableItems.map(i => i[1]);
   console.log("unrevocableItems amounts:");
   for (const am of unrevocableAmounts) {
-    console.log(am + ",");
+    console.log(am + " ether,");
   }
 
   console.log("revocableItems length:", revocableItems.length);
@@ -64,7 +74,7 @@ function parse2020LrcRewards() {
   const revocableAmounts = revocableItems.map(i => i[1]);
   console.log("revocableItems amounts:");
   for (const am of revocableAmounts) {
-    console.log(am + ",");
+    console.log(am + " ether,");
   }
 
 }
