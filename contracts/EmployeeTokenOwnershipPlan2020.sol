@@ -124,4 +124,12 @@ contract EmployeeTokenOwnershipPlan2020 is BaseTokenOwnershipPlan
         require(_totalReward == totalReward, "VALUE_MISMATCH");
     }
 
+    function canChangeAddressFor(address who)
+        internal
+        view
+        override
+        returns (bool) {
+        return msg.sender == who;
+    }
+
 }

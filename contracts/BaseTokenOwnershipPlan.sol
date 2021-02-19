@@ -42,9 +42,10 @@ abstract contract BaseTokenOwnershipPlan is Claimable
         _withdraw(recipient);
     }
 
-    function updateRecipient(address newRecipient)
+    function updateRecipient(address oldRecipient, address newRecipient)
         external
     {
+        require(canChangeAddressFor(oldRecipient), "UNAUTHORIZED");
         require(newRecipient != address(0), "INVALID_ADDRESS");
         require(records[newRecipient].rewarded == 0, "INVALID_NEW_RECIPIENT");
 
@@ -104,4 +105,10 @@ abstract contract BaseTokenOwnershipPlan is Claimable
         uint amount = ERC20(lrcAddress).balanceOf(address(this));
         require(ERC20(lrcAddress).transfer(msg.sender, amount), "transfer failed");
     }
+
+    function canChangeAddressFor(address who)
+        internal
+        view
+        virtual
+        returns (bool);
 }

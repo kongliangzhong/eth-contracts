@@ -105,17 +105,12 @@ contract CancellableEmployeeTokenOwnershipPlan is BaseTokenOwnershipPlan
         require(_totalReward == totalReward, "VALUE_MISMATCH");
     }
 
-
-    function changeMemberAddress(address oldAddr, address newAddr)
-        external
-        onlyOwner
-    {
-        require(newAddr != oldAddr && newAddr != address(0), "INVALID_NEW_ADDRESS");
-        require(records[newAddr].rewarded == 0, "INVALID_NEW_ADDRESS");
-
-        Record storage r = records[oldAddr];
-        records[newAddr] = r;
-        delete records[oldAddr];
-        emit MemberAddressChanged(oldAddr, newAddr);
+    function canChangeAddressFor(address who)
+        internal
+        view
+        override
+        returns (bool) {
+        return msg.sender == who || msg.sender == owner;
     }
+
 }
