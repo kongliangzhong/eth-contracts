@@ -120,6 +120,8 @@ contract CancellableEmployeeTokenOwnershipPlan is Claimable
         vestStart = block.timestamp;
 
         for (uint i = 0; i < _members.length; i++) {
+            require(records[_members[i]].rewarded == 0, "DUPLICATED_MEMBER");
+
             Record memory record = Record(block.timestamp, _amounts[i], 0);
             records[_members[i]] = record;
             totalReward = totalReward.add(_amounts[i]);
@@ -138,7 +140,12 @@ contract CancellableEmployeeTokenOwnershipPlan is Claimable
         view
         returns(uint)
     {
-        return records[recipient].rewarded.mul(block.timestamp.sub(vestStart)) / vestPeriod;
+
+        if (block.timestamp - vestStart < vestPeriod) {
+            return records[recipient].rewarded.mul(block.timestamp.sub(vestStart)) / vestPeriod;
+        } else {
+            return records[recipient].rewarded;
+        }
     }
 
     function withdrawable(address recipient)
@@ -174,6 +181,8 @@ contract CancellableEmployeeTokenOwnershipPlan is Claimable
         onlyOwner
     {
         require(newAddr != oldAddr && newAddr != address(0), "INVALID_NEW_ADDRESS");
+        require(records[newAddr].rewarded == 0, "INVALID_NEW_ADDRESS");
+
         Record storage r = records[oldAddr];
         records[newAddr] = r;
         delete records[oldAddr];

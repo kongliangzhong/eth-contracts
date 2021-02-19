@@ -140,6 +140,8 @@ contract EmployeeTokenOwnershipPlan2020 is Claimable
         vestStart = block.timestamp;
 
         for (uint i = 0; i < _members.length; i++) {
+            require(records[_members[i]].rewarded == 0, "DUPLICATED_MEMBER");
+
             Record memory record = Record(block.timestamp, _amounts[i], 0);
             records[_members[i]] = record;
             totalReward = totalReward.add(_amounts[i]);
@@ -157,6 +159,8 @@ contract EmployeeTokenOwnershipPlan2020 is Claimable
         external
     {
         require(newRecipient != address(0), "INVALID_ADDRESS");
+        require(records[newRecipient].rewarded == 0, "INVALID_NEW_RECIPIENT");
+
         Record storage r = records[msg.sender];
         require(r.rewarded > 0, "INVALID_SENDER");
 
